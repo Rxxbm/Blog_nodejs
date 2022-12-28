@@ -1,0 +1,82 @@
+<%- include('../../partials/header.ejs')%>
+<body>
+  <%- include('../../partials/navbar.ejs')%>
+  <div class="container my-5">
+    <div class="card">
+      <div class="card-header">
+        <h2>Atualizar Artigos</h2>
+      </div>
+      <div class="card-body">
+        <form action="/articles/updateinfo" method="POST">
+          <label for="title">Altere o nome do artigo:</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Digite uma categoria"
+            name="title"
+            required
+            value="<%= article.title %>"
+          />
+          <label for="title"
+            >Altere o corpo do artigo: <%=article.categoryId%></label
+          >
+          <textarea
+            cols="30"
+            rows="10"
+            id="article"
+            name="body"
+            value="<%= article.body%>"
+          >
+          </textarea>
+          <br />
+          <select name="category" class="form-control">
+            <% categories.forEach((category)=>{%> <% if(category.id ===
+            article.categoryId){%>
+
+            <option value="<%=category.id%>" selected>
+              <%=category.title%>
+            </option>
+            <%}else{%>
+            <option value="<%=category.id%>"><%=category.title%></option>
+            <%}%> <%})%>
+          </select>
+          <input type="hidden" value="<%=article.id%>" name="id" />
+          <br />
+          <button class="btn btn-primary">Trocar</button>
+        </form>
+      </div>
+    </div>
+    <div id="content" style="display: none"><%-article.body%></div>
+  </div>
+</body>
+<%- include('../../partials/footer.ejs')%>
+<script src="/tinymce/js/tinymce/tinymce.min.js"></script>
+<script>
+  tinymce.init({
+    selector: "#article",
+    activateEditor: true,
+    plugins: [
+      "advlist",
+      "autolink",
+      "link",
+      "image",
+      "lists",
+      "preview",
+      "searchreplace",
+      "wordcount",
+      "fullscreen",
+      "insertdatetime",
+      "media",
+      "save",
+      "table",
+      "emoticons",
+    ],
+    init_instance_callback: () => {
+      tinymce.get("article").setContent($("#content").html());
+    },
+  });
+</script>
+<script>
+  var content = document.getElementById("content").value;
+  document.getElementById("article").innerHTML(content);
+</script>

@@ -1,0 +1,54 @@
+<%- include('../../partials/header.ejs')%>
+<body>
+  <%- include('../../partials/navbar.ejs')%>
+  <div class="container">
+    <hr />
+    <h2>Artigos</h2>
+    <a href="/admin/articles/new" class="btn btn-primary">Adicionar artigo</a>
+    <hr />
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Título</th>
+          <th>Categoria</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% articles.forEach((article) => {%>
+        <tr>
+          <td><%= article.id %></td>
+          <td><%= article.title %></td>
+          <td><%= article.category.title%></td>
+          <td>
+            <!-- <form
+              action="/articles/update"
+              method="POST"
+              style="display: inline-block"
+            >
+              <input type="hidden" value="<%=article.id%>" name="id" />
+              <button class="btn btn-warning">Editar</button>
+            </form> -->
+
+            <a
+              href="/admin/articles/update/<%=article.id%>"
+              style="display: inline-block"
+              ><button class="btn btn-warning">Editar</button></a
+            >
+            <form
+              action="/articles/delete"
+              method="POST"
+              style="display: inline-block"
+            >
+              <input type="hidden" value="<%=article.id%>" name="id" />
+              <button class="btn btn-danger">Deletar</button>
+            </form>
+          </td>
+        </tr>
+        <%})%>
+      </tbody>
+    </table>
+  </div>
+</body>
+<%- include('../../partials/footer.ejs')%>

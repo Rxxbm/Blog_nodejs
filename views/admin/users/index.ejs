@@ -1,0 +1,49 @@
+<%- include('../../partials/header.ejs')%>
+<body>
+  <%- include('../../partials/navbar.ejs')%>
+  <div class="container">
+    <hr />
+    <h2>Usúarios</h2>
+
+    <hr />
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>E-mail</th>
+          <th>Senha</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach((user) => {%>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.email %></td>
+          <td><%= user.password%></td>
+          <td>
+            <!-- <form
+              action="/users/update"
+              method="POST"
+              style="display: inline-block"
+            >
+              <input type="hidden" value="<%=user.id%>" name="id" />
+              <button class="btn btn-warning">Editar</button>
+            </form> -->
+
+            <form
+              action="/users/delete"
+              method="POST"
+              style="display: inline-block"
+            >
+              <input type="hidden" value="<%=user.id%>" name="id" />
+              <button class="btn btn-danger">Deletar</button>
+            </form>
+          </td>
+        </tr>
+        <%})%>
+      </tbody>
+    </table>
+  </div>
+</body>
+<%- include('../../partials/footer.ejs')%>

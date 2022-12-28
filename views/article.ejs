@@ -1,0 +1,19 @@
+<%- include('partials/header.ejs')%>
+<body>
+  <div class="container-fluid bg-dark text-white p-3">
+    <h1>Guiapress</h1>
+    <div>
+      <a href="/" class="nav-tem navbar-end text-white">Voltar ao inicio</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card my-3">
+      <div class="card-header text-center">
+        <h2><%=article.title%></h2>
+      </div>
+      <div class="card-body"><%-article.body%></div>
+    </div>
+  </div>
+</body>
+<%- include('partials/footer.ejs')%>
